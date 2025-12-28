@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About ZyroKart - The Gen Z Led E-commerce Revolution. Meet the teenage team building the future of shopping.">
+    <meta name="theme-color" content="#FFD700">
+    <title>About Us | ZyroKart</title>
+    
+    <!-- External Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Reuse existing styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page Specific Styles -->
+    <style>
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .team-role {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .team-age {
+            background: var(--bg-secondary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            color: var(--text-main);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .contact-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            text-align: center;
+        }
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <!-- Navigation Header (Consistent with Home) -->
+    <header class="glass-header">
+        <nav class="nav-container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                <span class="logo-text">ZYRO<span>KART</span></span>
+            </div>
+
+            <!-- Simplified Nav for About Page -->
+            <div class="nav-actions">
+                <a href="index.html" class="btn-glass-lg" style="padding: 8px 20px; font-size: 0.9rem;">Back to Shop</a>
+                <button class="nav-icon-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" style="min-height: 60vh;">
+            <div class="hero-content">
+                <span class="pill-tag"><i class="fas fa-rocket"></i> The Revolution</span>
+                <h1 class="animate-up">Built by Gen Z <br><span class="gradient-text">For Gen Z</span></h1>
+                <p class="animate-up delay-1">
+                    We don't study our customers—we ARE our customers. ZyroKart is the first e-commerce platform built entirely by teenagers to solve the problems of the modern generation.
+                </p>
+            </div>
+            
+            <div class="hero-visual animate-fade">
+                <div class="floating-card">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500" alt="Team Work">
+                    <div class="card-floating-info">
+                        <span>Our Mission</span>
+                        <strong>Empower Youth</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Text -->
+        <section class="container">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>
+                    ZyroKart (formerly Victory Bazaar) started with a simple observation: E-commerce platforms were built by the old guard for corporations. 
+                    <strong>Mohd Shanawar Abbas</strong>, our 17-year-old CEO, coded 95% of this platform solo to create a space that truly understands youth psychology.
+                </p>
+                <br>
+                <p>
+                    From AI-powered visual search to student-friendly pricing, every feature is designed to make shopping smarter, faster, and cooler.
+                </p>
+            </div>
+        </section>
+
+        <!-- Team Grid -->
+        <section class="products-section">
+            <div class="section-header center">
+                <h3>Meet The Founders</h3>
+                <p>The youngest, most ambitious team in Indian E-commerce</p>
+            </div>
+            
+            <div class="product-grid">
+                <!-- CEO -->
+                <div class="product-card animate-fade">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400" alt="Mohd Shanawar Abbas">
+                    </div>
+                    <div class="product-info">
+                        <span class="team-role">CEO & Founder <span class="team-age">17</span></span>
+                        <h4>Mohd Shanawar Abbas</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Built the entire platform architecture. Visionary leader.</p>
+                    </div>
+                </div>
+
+                <!-- CTO -->
+                <div class="product-card animate-fade">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400" alt="Mukesh Pandey">
+                    </div>
+                    <div class="product-info">
+                        <span class="team-role">CTO <span class="team-age">23</span></span>
+                        <h4>Mukesh Pandey</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Ex-Amazon Developer. Scalable tech expert.</p>
+                    </div>
+                </div>
+
+                <!-- CRO -->
+                <div class="product-card animate-fade">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400" alt="Kubair Rastogi">
+                    </div>
+                    <div class="product-info">
+                        <span class="team-role">CRO <span class="team-age">17</span></span>
+                        <h4>Kubair Rastogi</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Sales Prodigy. Driving revenue and growth.</p>
+                    </div>
+                </div>
+
+                <!-- COO -->
+                <div class="product-card animate-fade">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Avika Srivastav">
+                    </div>
+                    <div class="product-info">
+                        <span class="team-role">COO <span class="team-age">15</span></span>
+                        <h4>Avika Srivastav</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Operations Lead. Ensuring smooth execution.</p>
+                    </div>
+                </div>
+
+                <!-- CMO -->
+                <div class="product-card animate-fade">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400" alt="Krishna Singh">
+                    </div>
+                    <div class="product-info">
+                        <span class="team-role">CMO <span class="team-age">16</span></span>
+                        <h4>Krishna Singh</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Marketing Lead. The voice of the brand.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="products-section" style="background: var(--bg-secondary);">
+            <div class="section-header center">
+                <h3>Get in Touch</h3>
+                <p>We are available for pitch meetings anytime.</p>
+            </div>
+            
+            <div class="contact-grid" style="max-width: 1000px; margin: 0 auto;">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Headquarters</h4>
+                    <p>Lucknow, Uttar Pradesh,<br>India</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Us</h4>
+                    <p><a href="mailto:victorybazaar.help@gmail.com">victorybazaar.help@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h4>Call Us</h4>
+                    <p>+91 96822 03648</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; <span id="copyright-year">2025</span> ZyroKart. Made with ❤️ in India</p>
+        </div>
+    </footer>
+
+    <!-- Scripts (Required for Theme Toggle) -->
+    <script src="script.js"></script>
+</body>
+</html>

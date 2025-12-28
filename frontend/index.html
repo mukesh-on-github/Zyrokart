@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZyroKart - The Gen Z AI-Powered Shopping Revolution. Find trending fashion with our AI assistant.">
+    <meta name="theme-color" content="#FFD700">
+    <title>ZyroKart | AI-Powered Premium Shopping</title>
+    
+    <!-- External Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+
+    <!-- Toast Notification System -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i id="toast-icon" class="fas fa-check-circle"></i>
+            <span id="toast-message">Notification</span>
+        </div>
+    </div>
+
+    <!-- Navigation Header (Glassmorphism) -->
+    <header class="glass-header">
+        <nav class="nav-container">
+            <!-- Brand -->
+            <div class="logo" onclick="window.location.reload()">
+                <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                <span class="logo-text">ZYRO<span>KART</span></span>
+            </div>
+
+            <!-- Smart Search Bar -->
+            <div class="search-section">
+                <div class="search-bar-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="main-search" placeholder="Search products, brands, trends...">
+                    <button id="ai-lens-trigger" class="lens-btn" title="Open Victory Lens">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Nav Actions -->
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="theme-toggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <button class="nav-icon-btn badge-parent" id="wishlist-btn" title="Wishlist">
+                    <i class="far fa-heart"></i>
+                    <span class="badge" id="wishlist-count">0</span>
+                </button>
+
+                <button class="nav-icon-btn badge-parent" id="cart-btn" title="Cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </button>
+
+                <div class="user-menu">
+                    <button class="btn-primary" id="login-btn">Login</button>
+                    <!-- User Dropdown (Hidden by default) -->
+                    <div class="user-dropdown hidden" id="user-dropdown">
+                        <a href="#profile"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#orders"><i class="fas fa-box"></i> Orders</a>
+                        <hr>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="nav-icon-btn mobile-only" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="pill-tag"><i class="fas fa-sparkles"></i> New Gen-Z Collection</span>
+                <h1 class="animate-up">Shop Smart with <br><span class="gradient-text">Victory AI</span></h1>
+                <p class="animate-up delay-1">
+                    Experience the future of e-commerce. Upload a photo to find your style or ask our AI assistant for personalized recommendations.
+                </p>
+                <div class="hero-btns animate-up delay-2">
+                    <button class="btn-primary-lg" onclick="document.getElementById('products-view').scrollIntoView({behavior:'smooth'})">
+                        Start Shopping
+                    </button>
+                    <button class="btn-glass-lg" onclick="document.getElementById('ai-chat-trigger').click()">
+                        <i class="fas fa-robot"></i> Ask AI
+                    </button>
+                </div>
+                
+                <div class="hero-stats animate-up delay-3">
+                    <div class="stat-item">
+                        <strong>50k+</strong>
+                        <span>Products</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>24/7</strong>
+                        <span>AI Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>Fast</strong>
+                        <span>Delivery</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual animate-fade">
+                <div class="floating-card product-preview">
+                    <!-- Placeholder Image (Replace with local asset if needed) -->
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Trending Shoe">
+                    <div class="card-floating-info">
+                        <span>Trending Now</span>
+                        <strong>Zyro Hyper-X</strong>
+                        <div class="price-tag">₹1,499</div>
+                    </div>
+                </div>
+                <div class="visual-circle circle-1"></div>
+                <div class="visual-circle circle-2"></div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-section">
+            <div class="section-header">
+                <h3>Shop by Category</h3>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="category-grid" id="category-list">
+                <!-- Categories injected via JS -->
+                <div class="category-card active" data-cat="all"><i class="fas fa-th-large"></i> All</div>
+                <div class="category-card" data-cat="tech"><i class="fas fa-laptop"></i> Tech</div>
+                <div class="category-card" data-cat="fashion"><i class="fas fa-tshirt"></i> Fashion</div>
+                <div class="category-card" data-cat="shoes"><i class="fas fa-shoe-prints"></i> Shoes</div>
+                <div class="category-card" data-cat="accessories"><i class="fas fa-glasses"></i> Accessories</div>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section class="products-section" id="products-view">
+            <div class="section-header center">
+                <h3>Featured Collection</h3>
+                <p>Curated just for you based on latest trends</p>
+            </div>
+            
+            <div class="product-grid" id="product-container">
+                <!-- Loading State / Products injected via JS -->
+                <div class="loader-placeholder">
+                    <div class="spinner"></div>
+                    <p>Loading amazing products...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Wallet Section (Hidden by default) -->
+        <section id="wallet-section" class="hidden container">
+            <div class="glass-card wallet-dashboard">
+                <h2>My Wallet</h2>
+                <div class="balance-display">
+                    <span class="currency">₹</span>
+                    <span id="walletBalance">0.00</span>
+                </div>
+                <button class="btn-primary" onclick="addMoney()">+ Add Funds</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                    <span class="logo-text">ZYRO<span>KART</span></span>
+                </div>
+                <p>The Gen Z Commerce Revolution. Pioneering the future of online shopping with Artificial Intelligence.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Lucknow, Uttar Pradesh, India</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:victorybazaar.help@gmail.com">victorybazaar.help@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> +91 96822 03648</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="copyright-year">2025</span> ZyroKart. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================= MODALS & OVERLAYS ================= -->
+
+    <!-- Victory Lens AI Modal -->
+    <div class="modal" id="lens-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card">
+            <button class="close-modal">&times;</button>
+            <div class="modal-header">
+                <div class="icon-box"><i class="fas fa-camera"></i></div>
+                <div>
+                    <h2>Zyro Lens AI</h2>
+                    <p>Visual Search Engine</p>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                <p class="instruction">Upload a photo to find matching products instantly.</p>
+                
+                <div class="upload-area" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3>Drag & Drop or <span>Browse</span></h3>
+                    <p>Supports JPG, PNG (Max 5MB)</p>
+                    <input type="file" id="lens-input" hidden accept="image/*">
+                </div>
+
+                <div id="lens-preview-container" class="hidden">
+                    <div class="preview-wrapper">
+                        <img id="lens-preview" src="" alt="Preview">
+                        <button class="remove-img"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="analysis-status">Ready to scan</div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-primary full-width" id="analyze-btn" disabled>
+                    <i class="fas fa-search"></i> Search Similar Products
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chatbot Interface -->
+    <div id="ai-chat-trigger" title="Chat with Zyro AI">
+        <i class="fas fa-comment-dots"></i>
+        <span class="chat-badge">1</span>
+    </div>
+
+    <div id="ai-chat-window" class="hidden">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <div>
+                    <span>Zyro Assistant</span>
+                    <span class="status-dot"></span>
+                </div>
+            </div>
+            <button id="close-chat">&times;</button>
+        </div>
+        
+        <div id="chat-messages">
+            <div class="msg bot-msg">
+                👋 Hi there! I'm Zyro. I can help you find products, track orders, or compare prices. What are you looking for?
+            </div>
+        </div>
+        
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="send-chat"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Newsletter Popup (Hidden by default) -->
+    <div class="modal" id="newsletter-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card newsletter-card">
+            <button class="close-modal">&times;</button>
+            <div class="newsletter-content">
+                <i class="fas fa-envelope-open-text icon-lg"></i>
+                <h2>Join the Revolution</h2>
+                <p>Get exclusive drops and AI-curated offers straight to your inbox.</p>
+                <div class="input-group">
+                    <input type="email" placeholder="Enter your email">
+                    <button class="btn-primary">Subscribe</button>
+                </div>
+                <p class="tiny-text">No spam, ever. Unsubscribe anytime.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login/Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content glass-card auth-card">
+            <button class="close-modal">&times;</button>
+            <h2>Welcome Back</h2>
+            <p>Login to access your wallet and wishlist</p>
+            <button class="btn-google">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+            <div class="divider"><span>OR</span></div>
+            <form class="auth-form">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary full-width">Login</button>
+            </form>
+            <div class="auth-footer">
+                <a href="#">Forgot Password?</a>
+                <span>New here? <a href="#">Create Account</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
